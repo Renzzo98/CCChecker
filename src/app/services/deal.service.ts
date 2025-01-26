@@ -39,11 +39,12 @@ export class DealService {
     this.deals = [
       {
         id: 1,
-        name: 'Summer Cashback',
+        name: 'Mobil Gas',
+        value: '5%',
         startDate: new Date('2024-06-01'),
         endDate: new Date('2024-08-31'),
         cards: [1],
-        type: DealType.CASHBACK,
+        type: DealType.GAS,
         description: '5% cashback on summer activities'
       }
     ];

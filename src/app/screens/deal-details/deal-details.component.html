@@ -2,7 +2,7 @@
   <div class="header">
     <div class="back-section" (click)="goBack()">
       <fa-icon [icon]="faArrowLeft"></fa-icon>
-      <span>Back to Deals</span>
+      <span>{{ isAdmin ? 'Back to Deals' : 'Back' }}</span>
     </div>
     <div class="status-badge" [ngClass]="getDealStatus().class">
       {{ getDealStatus().text }}
@@ -10,11 +10,18 @@
   </div>
 
   <div class="deal-info" *ngIf="deal">
-    <p class="deal-name">{{ deal.name }}</p>
-    <div class="deal-type-badge" [ngClass]="'type-' + deal.type.toLowerCase()">
+    <div class="deal-main-info">
+      <p class="deal-name">{{ deal.name }}</p>
+      <div class="deal-type-badge" [ngClass]="'type-' + deal.type.toLowerCase()">
         <fa-icon [icon]="dealTypeIcons[deal.type]"></fa-icon>
         <span class="deal-type-text">{{ deal.type }}</span>
-    </div>    
+      </div>
+      <div class="deal-value-display">
+        <span class="value">{{ deal.value }}</span>
+        <span class="label">Value</span>
+      </div>
+    </div>
+    
     <div class="deal-dates">
       <div class="date-container">
         <div class="date-label">FROM</div>
@@ -43,7 +50,7 @@
     </div>
   </div>
 
-  <div class="action-bar">
+  <div class="action-bar" *ngIf="isAdmin">
     <button class="edit-btn" (click)="editDeal()">
       <fa-icon [icon]="faEdit"></fa-icon>
       Edit Deal

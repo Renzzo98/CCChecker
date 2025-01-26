@@ -38,7 +38,8 @@ export class DealEditorComponent implements OnInit {
   ) {
     this.dealForm = this.fb.group({
       name: ['', Validators.required],
-      type: [DealType.CASHBACK, Validators.required],
+      type: [DealType.DINING, Validators.required],
+      value: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       description: [''],
@@ -68,6 +69,7 @@ export class DealEditorComponent implements OnInit {
       this.dealForm.patchValue({
         name: deal.name,
         type: deal.type,
+        value: deal.value,
         startDate: this.formatDate(new Date(deal.startDate)),
         endDate: this.formatDate(new Date(deal.endDate)),
         description: deal.description,
@@ -87,6 +89,7 @@ export class DealEditorComponent implements OnInit {
         id: this.isNewDeal ? this.generateId() : Number(this.route.snapshot.paramMap.get('id')),
         name: formValue.name,
         type: formValue.type,
+        value: formValue.value,
         startDate: new Date(formValue.startDate),
         endDate: new Date(formValue.endDate),
         description: formValue.description,

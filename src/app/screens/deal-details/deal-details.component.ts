@@ -8,6 +8,8 @@ import { CreditCardService } from '../../services/credit-card.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DealTypeIcons } from '../../models/deal.model';
 import { faEdit, faTrash, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../../services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-deal-details',
@@ -23,12 +25,15 @@ export class DealDetailsComponent implements OnInit {
   faEdit = faEdit;
   faTrash = faTrash;
   faArrowLeft = faArrowLeft;
+  isAdmin = false;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
+    private router: Router,
     private dealService: DealService,
-    private creditCardService: CreditCardService
+    private creditCardService: CreditCardService,
+    private authService: AuthService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -42,6 +47,10 @@ export class DealDetailsComponent implements OnInit {
       
       this.loadRelatedCards();
     });
+
+    this.authService.isAuthenticated$.subscribe(
+      isAuthenticated => this.isAdmin = isAuthenticated
+    );
   }
 
   private loadRelatedCards() {
@@ -55,7 +64,11 @@ export class DealDetailsComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/admin/deals']);
+    if (this.isAdmin) {
+      this.router.navigate(['/admin/deals']);
+    } else {
+      this.location.back();
+    }
   }
 
   getDealStatus(): { text: string; class: string } {

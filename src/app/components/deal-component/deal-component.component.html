@@ -1,10 +1,25 @@
-<div class="deal-container" (click)="navigateToDetails()">
-    <div class="deal-header">
-        <fa-icon [icon]="dealTypeIcons[deal.type]" class="deal-icon"></fa-icon>
+<div class="deal-card" [routerLink]="['/admin/deal', deal.id]">
+  <div class="deal-header">
+    <div class="deal-type" [ngClass]="'type-' + deal.type.toLowerCase()">
+      <fa-icon [icon]="dealTypeIcons[deal.type]"></fa-icon>
+      <span>{{ deal.type }}</span>
     </div>
-    <h3>{{ deal.name }}</h3>
-    <p class="deal-dates">
-        {{ deal.startDate | date }} - {{ deal.endDate | date }}
-    </p>
-    <p class="deal-description">{{ deal.description }}</p>
+  </div>
+
+  <div class="deal-content">
+    <h3 class="deal-name">{{ deal.name }}</h3>
+    <div class="deal-value" [ngClass]="getValueColor()">{{ deal.value }}</div>
+    
+    <div class="deal-dates">
+      <div class="date">
+        <span class="label">From</span>
+        {{ deal.startDate | date:'MMM d' }}
+      </div>
+      <span class="separator">-</span>
+      <div class="date">
+        <span class="label">To</span>
+        {{ deal.endDate | date:'MMM d' }}
+      </div>
+    </div>
+  </div>
 </div>

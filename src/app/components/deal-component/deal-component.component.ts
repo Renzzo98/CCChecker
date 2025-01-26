@@ -1,23 +1,34 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Deal, DealTypeIcons } from '../../models/deal.model';
 
 @Component({
-  selector: 'app-deal-component',
+  selector: 'app-deal',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, RouterModule, FontAwesomeModule],
   templateUrl: './deal-component.component.html',
-  styleUrl: './deal-component.component.scss'
+  styleUrls: ['./deal-component.component.scss']
 })
-export class DealComponentComponent {
+export class DealComponent {
   @Input() deal!: Deal;
   dealTypeIcons = DealTypeIcons;
 
-  constructor(private router: Router) {}
-
-  navigateToDetails() {
-    this.router.navigate(['/admin/deal', this.deal.id]);
+  getValueColor(): string {
+    const value = this.deal.value.toLowerCase();
+    if (value.includes('%')) {
+      const percent = parseFloat(value);
+      if (percent >= 5) return 'high-value';
+      if (percent >= 3) return 'medium-value';
+      return 'low-value';
+    }
+    if (value.includes('$')) {
+      const amount = parseFloat(value.replace('$', ''));
+      if (amount >= 100) return 'high-value';
+      if (amount >= 50) return 'medium-value';
+      return 'low-value';
+    }
+    return 'default-value';
   }
 } 

@@ -14,11 +14,16 @@
                 <input 
                     type="text" 
                     [(ngModel)]="searchQuery" 
-                    placeholder="Search..."
+                    placeholder="Search deals..."
                     (input)="onSearch()"
                 >
-                <button (click)="onSearch()">Search</button>
             </div>
+        </div>
+
+        <div class="search-results" *ngIf="isSearching">
+            <h2 *ngIf="filteredDeals.length">Found Deals</h2>
+            <p *ngIf="!filteredDeals.length" class="no-results">No deals found for "{{ searchQuery }}"</p>
+            <app-deal-list [deals]="filteredDeals"></app-deal-list>
         </div>
     </div>
 </div>

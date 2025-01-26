@@ -38,6 +38,7 @@
 
     .deal-name {
         font-size: 2.5rem;
+        margin-top: 1rem;
         margin-bottom: 0.5rem;
         text-align: center;
     }
@@ -75,6 +76,14 @@
           background-color: #f8d7da;
           border-color: #f5c6cb;
           color: #721c24;
+        }
+
+        .deal-value {
+          font-weight: 600;
+          margin-left: 0.5rem;
+          padding-left: 0.5rem;
+          padding-top: 0.5rem;
+          border-left: 1px solid currentColor;
         }
     }
 
@@ -236,6 +245,73 @@
 
     &:hover {
       background-color: #c82333;
+    }
+  }
+}
+
+.deal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.deal-value-badge {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  background: #f8f9fa;
+  padding: 0.3rem 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  margin-bottom: 0.5rem;
+}
+
+.deal-main-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+
+  .deal-name {
+    font-size: 1.8rem;
+    margin: 0;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  .deal-type-badge {
+    margin: 1.5rem 0;
+  }
+
+  .deal-value-display {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 2px solid #f0f2f5;
+    width: 100%;
+
+    .value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2c3e50;
+      line-height: 1;
+    }
+
+    .label {
+      font-size: 0.9rem;
+      color: #95a5a6;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
     }
   }
 } 
