@@ -10,6 +10,7 @@
     <div class="home-container">
         <div class="search-section">
             <h1>What are you buying?</h1>
+            <p *ngIf="isLoggedIn">Welcome, {{ (authService.currentUser$ | async)?.email }}</p>
             <div class="search-box">
                 <input 
                     type="text" 
@@ -32,10 +33,20 @@
 
 <div class="login-popup" *ngIf="showLoginPopup">
     <div class="popup-content">
-        <h2>Admin</h2>
+        <h2>Admin Login</h2>
         <div class="login-form">
-            <input type="text" [(ngModel)]="username" placeholder="Username">
-            <input type="password" [(ngModel)]="password" placeholder="Password">
+            <input 
+                type="email" 
+                [(ngModel)]="email" 
+                placeholder="Email"
+                autocomplete="email"
+            >
+            <input 
+                type="password" 
+                [(ngModel)]="password" 
+                placeholder="Password"
+                autocomplete="current-password"
+            >
         </div>
         <div class="popup-buttons">
             <button (click)="onLogin()">Login</button>

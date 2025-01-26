@@ -1,23 +1,40 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, Auth, User } from 'firebase/auth';
+import { firebaseApp } from '../config/firebase.config';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+  private auth: Auth;
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
+  isAuthenticated$ = this.currentUser$.pipe(map(user => !!user));
 
-  login(username: string, password: string): boolean {
-    // In production, this should be an API call
-    if (username === 'admin' && password === 'admin123') {
-      this.isAuthenticatedSubject.next(true);
-      return true;
-    }
-    return false;
+  constructor() {
+    this.auth = getAuth(firebaseApp);
+    onAuthStateChanged(this.auth, user => {
+      this.currentUserSubject.next(user);
+    });
   }
 
-  logout() {
-    this.isAuthenticatedSubject.next(false);
+  async login(email: string, password: string): Promise<boolean> {
+    try {
+      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      return !!userCredential.user;
+    } catch (error: any) {
+      console.error('Login error:', error.code, error.message);
+      throw error; // Let the component handle the error
+    }
+  }
+
+  async logout(): Promise<void> {
+    try {
+      await signOut(this.auth);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   }
 } 

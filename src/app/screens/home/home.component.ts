@@ -22,7 +22,7 @@ import { DealListComponent } from '../../components/deal-list/deal-list.componen
 export class HomeComponent implements OnInit {
   searchQuery = '';
   showLoginPopup: boolean = false;
-  username: string = '';
+  email: string = '';
   password: string = '';
   isLoggedIn: boolean = false;
   faGear = faGear;
@@ -41,9 +41,9 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.isAuthenticated$.subscribe(
-      isAuthenticated => this.isLoggedIn = isAuthenticated
-    );
+    this.authService.currentUser$.subscribe(user => {
+      this.isLoggedIn = !!user;
+    });
     this.dealService.getDeals().subscribe(deals => {
       this.allDeals = deals;
     });
@@ -88,12 +88,24 @@ export class HomeComponent implements OnInit {
     this.showLoginPopup = !this.showLoginPopup;
   }
 
-  onLogin() {
-    if (this.authService.login(this.username, this.password)) {
-      this.toggleLoginPopup();
-      // Login successful
-    } else {
-      alert('Invalid credentials');
+  async onLogin() {
+    try {
+      const success = await this.authService.login(this.email, this.password);
+      if (success) {
+        this.toggleLoginPopup();
+        this.email = '';
+        this.password = '';
+      }
+    } catch (error: any) {
+      let message = 'Login failed';
+      if (error.code === 'auth/invalid-email') {
+        message = 'Invalid email format';
+      } else if (error.code === 'auth/user-not-found') {
+        message = 'User not found';
+      } else if (error.code === 'auth/wrong-password') {
+        message = 'Invalid password';
+      }
+      alert(message);
     }
   }
 
