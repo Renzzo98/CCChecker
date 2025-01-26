@@ -4,9 +4,13 @@
             <fa-icon [icon]="faArrowLeft"></fa-icon>
             <span>Back to Home</span>
         </div>
+        <button class="logout-btn" (click)="logout()">
+            <fa-icon [icon]="faSignOut"></fa-icon>
+            <span>Logout</span>
+        </button>
     </div>
 
-    <h1>Admin Center</h1>
+    <p class="admin-title">Admin Center</p>
     <div class="navigation-buttons">
       <app-icon-button
           [icon]="faCreditCard"

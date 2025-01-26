@@ -10,6 +10,7 @@
 .credit-cards-title {
     font-size: 2.5rem;
     font-weight: bold;
+    color: var(--text-primary);
 }
 
 .credit-cards-list {
@@ -28,8 +29,8 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1rem 1.5rem;
-  background: #007bff;
-  color: white;
+  background: var(--primary);
+  color: var(--surface);
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -41,7 +42,7 @@
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    background: #0056b3;
+    background: var(--primary-hover);
   }
 
   .plus-icon {
@@ -58,12 +59,12 @@
     padding-top: 2rem;
     background: none;
     border: none;
-    color: #007bff;
+    color: var(--primary);
     cursor: pointer;
     font-size: 1.1rem;
 
     &:hover {
-      color: #0056b3;
+      color: var(--primary-hover);
       text-decoration: underline;
     }
 }

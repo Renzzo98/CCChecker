@@ -26,12 +26,12 @@ import { CreditCard } from '../../models/credit-card.model';
       transition: all 0.2s;
 
       &:hover {
-        border-color: #007bff;
+        border-color: var(--primary);
       }
 
       &.selected {
-        background-color: #e7f1ff;
-        border-color: #007bff;
+        background-color: var(--primary);
+        border-color: var(--primary);
       }
 
       img {
@@ -44,6 +44,7 @@ import { CreditCard } from '../../models/credit-card.model';
       .card-name {
         margin: 0;
         font-size: 0.9rem;
+        color: var(--text-primary);
       }
     }
   `]

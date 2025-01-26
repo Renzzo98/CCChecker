@@ -1,33 +1,39 @@
 <div class="home-container">
-    <div class="gear-section">
-        <button class="icon-button" *ngIf="!isLoggedIn" (click)="toggleLoginPopup()">
-            <fa-icon [icon]="faGear" size="lg"></fa-icon>
+    <div class="top-bar">
+        <button class="theme-toggle" (click)="toggleTheme()">
+            <fa-icon [icon]="(isDarkTheme$ | async) ? faSun : faMoon"></fa-icon>
         </button>
-        <button class="icon-button" *ngIf="isLoggedIn" (click)="navigateToAdmin()">
-            <fa-icon [icon]="faUser" size="lg"></fa-icon>
-        </button>
+        <div class="gear-section">
+            <button class="icon-button" *ngIf="!isLoggedIn" (click)="toggleLoginPopup()">
+                <fa-icon [icon]="faGear" size="lg"></fa-icon>
+            </button>
+            <button class="icon-button" *ngIf="isLoggedIn" (click)="navigateToAdmin()">
+                <fa-icon [icon]="faUser" size="lg"></fa-icon>
+            </button>
+        </div>
     </div>
-    <div class="home-container">
-        <div class="search-section">
-            <h1>What are you buying?</h1>
-            <p *ngIf="isLoggedIn">Welcome, {{ (authService.currentUser$ | async)?.email }}</p>
-            <div class="search-box">
-                <input 
-                    type="text" 
-                    [(ngModel)]="searchQuery" 
-                    placeholder="Search deals..."
-                    (input)="onSearch()"
-                    aria-label="Search deals"
-                    role="searchbox"
-                >
-            </div>
-        </div>
 
-        <div class="search-results" *ngIf="isSearching">
-            <h2 *ngIf="filteredDeals.length">Found Deals</h2>
-            <p *ngIf="!filteredDeals.length" class="no-results">No deals found for "{{ searchQuery }}"</p>
-            <app-deal-list [deals]="filteredDeals"></app-deal-list>
+    <div class="error-banner" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+
+    <div class="search-section">
+        <h1>What are you buying?</h1>
+        <p class="welcome-message" *ngIf="isLoggedIn">Welcome, {{ (authService.currentUser$ | async)?.email }}</p>
+        <div class="search-box">
+            <input 
+                type="text" 
+                [(ngModel)]="searchQuery" 
+                placeholder="Search deals..."
+                (input)="onSearch()"
+                aria-label="Search deals"
+            >
         </div>
+    </div>
+
+    <div class="search-results" *ngIf="isSearching">
+        <h2 *ngIf="filteredDeals.length">Found Deals</h2>
+        <app-deal-list [deals]="filteredDeals"></app-deal-list>
     </div>
 </div>
 
@@ -53,10 +59,6 @@
             <button (click)="toggleLoginPopup()">Cancel</button>
         </div>
     </div>
-</div>
-
-<div class="error-message" *ngIf="errorMessage">
-  {{ errorMessage }}
 </div>
 
 <div class="loading-spinner" *ngIf="isLoading">

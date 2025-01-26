@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { IconButtonComponent } from '../../components/icon-button/icon-button.component';
-import { faCreditCard, faDollarSign, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCreditCard, faDollarSign, faArrowLeft, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-admin-center',
@@ -16,8 +17,12 @@ export class AdminCenterComponent {
   faCreditCard = faCreditCard;
   faDeals = faDollarSign;
   faArrowLeft = faArrowLeft;
+  faSignOut = faSignOut;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   navigateToCards() {
     // Will implement later
@@ -32,6 +37,11 @@ export class AdminCenterComponent {
   }
 
   goBack() {
+    this.router.navigate(['/']);
+  }
+
+  logout() {
+    this.authService.logout();
     this.router.navigate(['/']);
   }
 }

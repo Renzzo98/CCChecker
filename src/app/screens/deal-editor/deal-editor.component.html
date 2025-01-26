@@ -4,7 +4,7 @@
       <fa-icon [icon]="faArrowLeft"></fa-icon>
       <span>Back</span>
     </div>
-    <h1>{{ isNewDeal ? 'New Deal' : 'Edit Deal' }}</h1>
+    <h1 class="title">{{ isNewDeal ? 'New Deal' : 'Edit Deal' }}</h1>
   </div>
 
   <form [formGroup]="dealForm" (ngSubmit)="onSubmit()" class="deal-form">

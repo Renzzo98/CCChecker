@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { faGear, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faUser, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { DealService } from '../../services/deal.service';
@@ -11,6 +11,7 @@ import { CreditCardService } from '../../services/credit-card.service';
 import { Deal } from '../../models/deal.model';
 import { CreditCard } from '../../models/credit-card.model';
 import { DealListComponent } from '../../components/deal-list/deal-list.component';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-home',
@@ -27,17 +28,21 @@ export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;
   faGear = faGear;
   faUser = faUser;
+  faSun = faSun;
+  faMoon = faMoon;
   filteredDeals: Deal[] = [];
   allDeals: Deal[] = [];
   isSearching = false;
   isLoading = false;
   errorMessage: string = '';
+  isDarkTheme$ = this.themeService.isDarkTheme$;
 
   constructor(
     public authService: AuthService,
     private router: Router,
     private dealService: DealService,
-    private creditCardService: CreditCardService
+    private creditCardService: CreditCardService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -59,28 +64,23 @@ export class HomeComponent implements OnInit {
   }
 
   onSearch() {
-    if (this.searchQuery.length < 2) {
-      this.errorMessage = 'Please enter at least 2 characters';
-      return;
-    }
-    this.isLoading = true;
-    if (!this.searchQuery.trim()) {
-      this.filteredDeals = [];
+    if (this.searchQuery.trim()) {
+      this.isSearching = true;
+      this.filteredDeals = this.getActiveDeals().filter(deal => 
+        deal.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+      
+      // Clear error if results are found
+      if (this.filteredDeals.length > 0) {
+        this.errorMessage = '';
+      } else {
+        this.errorMessage = `No deals found for "${this.searchQuery}"`;
+      }
+    } else {
       this.isSearching = false;
-      this.isLoading = false;
-      return;
+      this.filteredDeals = [];
+      this.errorMessage = '';
     }
-
-    this.isSearching = true;
-    const query = this.searchQuery.toLowerCase();
-    const activeDeals = this.getActiveDeals();
-    
-    this.filteredDeals = activeDeals.filter(deal => 
-      deal.name.toLowerCase().includes(query) ||
-      deal.type.toLowerCase().includes(query) ||
-      deal.description.toLowerCase().includes(query)
-    );
-    this.isLoading = false;
   }
 
   toggleLoginPopup() {
@@ -111,5 +111,9 @@ export class HomeComponent implements OnInit {
 
   navigateToAdmin() {
     this.router.navigate(['/admin']);
+  }
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
   }
 } 

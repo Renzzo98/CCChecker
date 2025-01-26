@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Deal, DealTypeIcons } from '../../models/deal.model';
 
@@ -14,6 +14,8 @@ import { Deal, DealTypeIcons } from '../../models/deal.model';
 export class DealComponent {
   @Input() deal!: Deal;
   dealTypeIcons = DealTypeIcons;
+
+  constructor(private router: Router) {}
 
   getValueColor(): string {
     const value = this.deal.value.toLowerCase();
@@ -30,5 +32,13 @@ export class DealComponent {
       return 'low-value';
     }
     return 'default-value';
+  }
+
+  navigateToDetails() {
+    this.router.navigate(['/deals', this.deal.id], {
+      state: { 
+        returnToHome: true
+      }
+    });
   }
 } 

@@ -26,6 +26,7 @@ export class DealDetailsComponent implements OnInit {
   faTrash = faTrash;
   faArrowLeft = faArrowLeft;
   isAdmin = false;
+  returnToHome: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +35,12 @@ export class DealDetailsComponent implements OnInit {
     private creditCardService: CreditCardService,
     private authService: AuthService,
     private location: Location
-  ) {}
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state) {
+      this.returnToHome = navigation.extras.state['returnToHome'];
+    }
+  }
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -64,8 +70,8 @@ export class DealDetailsComponent implements OnInit {
   }
 
   goBack() {
-    if (this.isAdmin) {
-      this.router.navigate(['/admin/deals']);
+    if (this.returnToHome) {
+      this.router.navigate(['/']);
     } else {
       this.location.back();
     }
