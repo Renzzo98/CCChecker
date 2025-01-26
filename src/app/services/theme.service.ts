@@ -26,8 +26,10 @@ type ThemeColors = {
 })
 export class ThemeService {
   private renderer: Renderer2;
-  private colorScheme: ThemeType = 'light';
-  private isDarkTheme = new BehaviorSubject<boolean>(false);
+  private readonly THEME_KEY = 'preferred-theme';
+  // Get initial theme from localStorage or default to dark
+  private colorScheme: ThemeType = (localStorage.getItem(this.THEME_KEY) as ThemeType) || 'dark';
+  private isDarkTheme = new BehaviorSubject<boolean>(this.colorScheme === 'dark');
   isDarkTheme$ = this.isDarkTheme.asObservable();
 
   private themes: Record<ThemeType, ThemeColors> = {
@@ -70,6 +72,7 @@ export class ThemeService {
     private meta: Meta
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
+    this.meta.removeTag('name="theme-color"');
     this.init();
   }
 
@@ -87,12 +90,13 @@ export class ThemeService {
       );
     });
     
-    // Update theme-color meta tag
     this.meta.updateTag({
       name: 'theme-color',
       content: theme['--background']
     });
     
+    // Save preference to localStorage
+    localStorage.setItem(this.THEME_KEY, scheme);
     this.isDarkTheme.next(scheme === 'dark');
   }
 
