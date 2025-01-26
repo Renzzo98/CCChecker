@@ -1,0 +1,22 @@
+<div class="top-bar">
+  <button class="back-btn" (click)="goBack()">← Back</button>
+  <div class="id-container">
+    <p class="id-title">ID:</p>
+    <p class="card-id">{{ creditCard.id }}</p>
+  </div>
+</div>
+<div class="card-details">
+    <div class="card-info">
+      <img [src]="creditCard.image" alt="Credit Card">
+      <div class="card-type-badge" [ngStyle]="getTypeBadgeStyle()">
+        {{ creditCard.type }}
+      </div>
+      <p class="card-name">{{ creditCard.name }}</p>
+      <p class="bank-name">{{ creditCard.bank }}</p>
+      <p class="card-description">{{ creditCard.description }}</p>
+    </div>
+    <div class="action-buttons">
+      <button class="edit-btn" (click)="handleEdit()">Edit</button>
+      <button class="delete-btn" (click)="handleDelete()">Delete</button>
+    </div>
+</div>

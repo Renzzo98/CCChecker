@@ -1,0 +1,39 @@
+<div class="home-container">
+    <div class="gear-section">
+        <button class="icon-button" *ngIf="!isLoggedIn" (click)="toggleLoginPopup()">
+            <fa-icon [icon]="faGear" size="lg"></fa-icon>
+        </button>
+        <button class="icon-button" *ngIf="isLoggedIn" (click)="navigateToAdmin()">
+            <fa-icon [icon]="faUser" size="lg"></fa-icon>
+        </button>
+    </div>
+    <div class="home-container">
+        <div class="search-section">
+            <p *ngIf="isLoggedIn">Welcome, {{ username }}</p>
+            <h1>What are you buying?</h1>
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    [(ngModel)]="searchQuery" 
+                    placeholder="Search..."
+                    (input)="onSearch()"
+                >
+                <button (click)="onSearch()">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="login-popup" *ngIf="showLoginPopup">
+    <div class="popup-content">
+        <h2>Admin</h2>
+        <div class="login-form">
+            <input type="text" [(ngModel)]="username" placeholder="Username">
+            <input type="password" [(ngModel)]="password" placeholder="Password">
+        </div>
+        <div class="popup-buttons">
+            <button (click)="onLogin()">Login</button>
+            <button (click)="toggleLoginPopup()">Cancel</button>
+        </div>
+    </div>
+</div>

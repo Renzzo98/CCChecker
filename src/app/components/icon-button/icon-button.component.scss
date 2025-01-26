@@ -1,0 +1,33 @@
+.icon-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 24px;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #007bff;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+  }
+} 

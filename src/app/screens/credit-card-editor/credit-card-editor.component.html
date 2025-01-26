@@ -1,0 +1,97 @@
+<div class="editor-container">
+    <div class="top-bar">
+      <button class="back-btn" (click)="goBack()">← Back</button>
+      <h2>{{ isEditing ? 'Edit' : 'Add' }} Credit Card</h2>
+    </div>
+    
+    <form class="card-form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="bank">Bank <span class="required">*</span></label>
+        <select 
+          id="bank" 
+          [ngModel]="card.bank" 
+          (ngModelChange)="onBankChange($event)" 
+          name="bank" 
+          required
+        >
+          <option value="" disabled selected>Select a bank</option>
+          <option *ngFor="let bank of banks" [value]="bank">{{bank}}</option>
+        </select>
+        
+        <input 
+          *ngIf="showCustomBank"
+          type="text" 
+          [(ngModel)]="card.bank" 
+          name="customBank" 
+          placeholder="Enter bank name"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="name">Card Name <span class="required">*</span></label>
+        <input type="text" id="name" [(ngModel)]="card.name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="type">Card Type <span class="required">*</span></label>
+        <select 
+          id="type" 
+          [ngModel]="card.type" 
+          (ngModelChange)="onCardTypeChange($event)" 
+          name="type" 
+          required
+        >
+          <option value="" disabled selected>Select card type</option>
+          <option *ngFor="let type of cardTypes" [value]="type">{{type}}</option>
+        </select>
+        
+        <input 
+          *ngIf="showCustomType"
+          type="text" 
+          [(ngModel)]="card.type" 
+          name="customType" 
+          placeholder="Enter card type"
+          required
+        >
+      </div>
+
+      <div class="form-group image-upload">
+        <label>Card Image <span class="required">*</span></label>
+        <div class="image-preview" *ngIf="card.image || imagePreview">
+          <img [src]="imagePreview || card.image" alt="Card preview">
+        </div>
+        <div class="upload-controls">
+          <input 
+            type="file" 
+            id="image" 
+            (change)="onImageSelected($event)"
+            accept="image/*"
+            #fileInput
+            style="display: none"
+          >
+          <button type="button" class="upload-btn" (click)="fileInput.click()">
+            {{ card.image ? 'Change Image' : 'Upload Image' }}
+          </button>
+          <button 
+            type="button" 
+            class="remove-btn" 
+            *ngIf="card.image || imagePreview"
+            (click)="removeImage()"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" [(ngModel)]="card.description" name="description" rows="4"></textarea>
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" class="cancel-btn" (click)="goBack()">Cancel</button>
+        <button type="submit" class="save-btn" >Save</button>
+      </div>
+    </form>
+  </div>

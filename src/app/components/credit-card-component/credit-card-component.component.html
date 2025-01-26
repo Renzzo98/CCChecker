@@ -1,0 +1,20 @@
+<div class="credit-card-container">
+    <div class="credit-card-header" (click)="navigateToDetails()">
+        <img 
+            src="{{ creditCard.image }}" 
+            alt="Credit Card"
+            class="credit-card-image"
+        >
+        <div class="card-type-badge" [ngStyle]="getTypeBadgeStyle()">
+            {{ creditCard.type }}
+        </div>
+    </div>
+</div>
+<div class="credit-card-body">
+    <div class="credit-card-title">
+        <p>{{ creditCard.name }}</p>
+    </div>
+    <div class="credit-card-description">
+        <p>{{ creditCard.bank }}</p>
+    </div>
+</div>

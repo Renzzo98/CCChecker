@@ -1,0 +1,11 @@
+<div class="credit-cards-container">
+    <button class="back-btn" (click)="goBack()">← Back</button>
+    <h1 class="credit-cards-title">Credit Cards</h1>
+    <div class="credit-cards-list">
+        <app-credit-card-list [creditCards]="creditCards"></app-credit-card-list>
+    </div>
+    <button class="add-card-fab" (click)="addNewCard()">
+        <span class="plus-icon">+</span>
+        <span class="fab-label">Add Card</span>
+    </button>
+</div>
