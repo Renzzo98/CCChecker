@@ -1,7 +1,8 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Deal, DealType } from '../models/deal.model';
 import { isPlatformBrowser } from '@angular/common';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +60,12 @@ export class DealService {
   }
 
   getDeals(): Observable<Deal[]> {
-    return this.deals$;
+    return this.deals$.pipe(
+      catchError(error => {
+        console.error('Error fetching deals:', error);
+        return of([]);
+      })
+    );
   }
 
   getDealById(id: number): Deal | undefined {

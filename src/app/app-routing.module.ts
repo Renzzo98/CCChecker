@@ -14,12 +14,12 @@ export const routes: Routes = [
   { path: 'admin', component: AdminCenterComponent },
   { path: 'admin/cards', component: CreditCardsCenterComponent },
   { path: 'admin/card/new', component: CreditCardEditorComponent },
-  { path: 'admin/card/edit/:id', component: CreditCardEditorComponent },
-  { path: 'admin/card/:id', component: CreditCardDetailsComponent },
+  { path: 'admin/card/edit/:id', component: CreditCardEditorComponent, data: { renderMode: 'client' } },
+  { path: 'admin/card/:id', component: CreditCardDetailsComponent, data: { renderMode: 'client' } },
   { path: 'admin/deals', component: DealsCenterComponent },
   { path: 'admin/deal/new', component: DealEditorComponent },
-  { path: 'admin/deal/edit/:id', component: DealEditorComponent },
-  { path: 'admin/deal/:id', component: DealDetailsComponent },
+  { path: 'admin/deal/edit/:id', component: DealEditorComponent, data: { renderMode: 'client' } },
+  { path: 'admin/deal/:id', component: DealDetailsComponent, data: { renderMode: 'client' } },
   { path: '**', redirectTo: '' }
 ];
 

@@ -1,13 +1,20 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withPreloading, withComponentInputBinding, PreloadAllModules } from '@angular/router';
 import { routes } from './app-routing.module';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { Meta } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withComponentInputBinding(),
+      withPreloading(PreloadAllModules),
+    ),
     provideAnimations(),
+    {
+      provide: Meta,
+      useClass: Meta
+    }
   ]
 };

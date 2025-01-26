@@ -16,6 +16,8 @@
                     [(ngModel)]="searchQuery" 
                     placeholder="Search deals..."
                     (input)="onSearch()"
+                    aria-label="Search deals"
+                    role="searchbox"
                 >
             </div>
         </div>
@@ -40,4 +42,12 @@
             <button (click)="toggleLoginPopup()">Cancel</button>
         </div>
     </div>
+</div>
+
+<div class="error-message" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div class="loading-spinner" *ngIf="isLoading">
+  Loading...
 </div>

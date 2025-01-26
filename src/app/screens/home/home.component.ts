@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit {
   filteredDeals: Deal[] = [];
   allDeals: Deal[] = [];
   isSearching = false;
+  isLoading = false;
+  errorMessage: string = '';
 
   constructor(
     public authService: AuthService,
@@ -57,9 +59,15 @@ export class HomeComponent implements OnInit {
   }
 
   onSearch() {
+    if (this.searchQuery.length < 2) {
+      this.errorMessage = 'Please enter at least 2 characters';
+      return;
+    }
+    this.isLoading = true;
     if (!this.searchQuery.trim()) {
       this.filteredDeals = [];
       this.isSearching = false;
+      this.isLoading = false;
       return;
     }
 
@@ -72,6 +80,7 @@ export class HomeComponent implements OnInit {
       deal.type.toLowerCase().includes(query) ||
       deal.description.toLowerCase().includes(query)
     );
+    this.isLoading = false;
   }
 
   toggleLoginPopup() {
