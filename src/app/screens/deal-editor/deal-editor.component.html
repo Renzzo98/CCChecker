@@ -1,0 +1,58 @@
+<div class="deal-editor-container">
+  <div class="header">
+    <div class="back-section" (click)="goBack()">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+      <span>Back</span>
+    </div>
+    <h1>{{ isNewDeal ? 'New Deal' : 'Edit Deal' }}</h1>
+  </div>
+
+  <form [formGroup]="dealForm" (ngSubmit)="onSubmit()" class="deal-form">
+    <div class="form-group">
+      <label for="name">Deal Name</label>
+      <input id="name" type="text" formControlName="name">
+    </div>
+
+    <div class="form-group">
+      <label for="type">Deal Type</label>
+      <select id="type" formControlName="type">
+        <option *ngFor="let type of dealTypes" [value]="type">
+          {{ type }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input id="startDate" type="date" formControlName="startDate">
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input id="endDate" type="date" formControlName="endDate">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Related Cards</label>
+      <div class="cards-grid">
+        <app-related-card
+          *ngFor="let card of availableCards"
+          [card]="card"
+          [isSelected]="dealForm.get('cards')?.value?.includes(card.id)"
+          (selected)="onCardSelection($event)"
+        ></app-related-card>
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <button type="submit" [disabled]="!dealForm.valid">
+        {{ isNewDeal ? 'Create Deal' : 'Save Changes' }}
+      </button>
+    </div>
+  </form>
+</div> 

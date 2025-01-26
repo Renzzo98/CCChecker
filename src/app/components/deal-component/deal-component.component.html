@@ -1,0 +1,10 @@
+<div class="deal-container" (click)="navigateToDetails()">
+    <div class="deal-header">
+        <fa-icon [icon]="dealTypeIcons[deal.type]" class="deal-icon"></fa-icon>
+    </div>
+    <h3>{{ deal.name }}</h3>
+    <p class="deal-dates">
+        {{ deal.startDate | date }} - {{ deal.endDate | date }}
+    </p>
+    <p class="deal-description">{{ deal.description }}</p>
+</div>

@@ -1,0 +1,56 @@
+<div class="deal-details-container">
+  <div class="header">
+    <div class="back-section" (click)="goBack()">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+      <span>Back to Deals</span>
+    </div>
+    <div class="status-badge" [ngClass]="getDealStatus().class">
+      {{ getDealStatus().text }}
+    </div>
+  </div>
+
+  <div class="deal-info" *ngIf="deal">
+    <p class="deal-name">{{ deal.name }}</p>
+    <div class="deal-type-badge" [ngClass]="'type-' + deal.type.toLowerCase()">
+        <fa-icon [icon]="dealTypeIcons[deal.type]"></fa-icon>
+        <span class="deal-type-text">{{ deal.type }}</span>
+    </div>    
+    <div class="deal-dates">
+      <div class="date-container">
+        <div class="date-label">FROM</div>
+        <div class="date">{{ deal.startDate | date:'MMM d, y' }}</div>
+      </div>
+      <div class="date-separator">
+        <span class="line"></span>
+        <span class="arrow">→</span>
+        <span class="line"></span>
+      </div>
+      <div class="date-container">
+        <div class="date-label">TO</div>
+        <div class="date">{{ deal.endDate | date:'MMM d, y' }}</div>
+      </div>
+    </div>
+
+    <p class="deal-description">{{ deal.description }}</p>
+
+    <p class="related-cards-title">Related Cards</p>
+    <div class="cards-grid">
+      <div class="card-item" *ngFor="let card of relatedCards">
+        <img [src]="card.image" [alt]="card.name">
+        <h3>{{ card.name }}</h3>
+        <p>{{ card.bank }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-bar">
+    <button class="edit-btn" (click)="editDeal()">
+      <fa-icon [icon]="faEdit"></fa-icon>
+      Edit Deal
+    </button>
+    <button class="delete-btn" (click)="confirmDelete()">
+      <fa-icon [icon]="faTrash"></fa-icon>
+      Delete Deal
+    </button>
+  </div>
+</div> 

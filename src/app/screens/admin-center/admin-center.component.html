@@ -1,4 +1,11 @@
 <div class="admin-container">
+    <div class="header">
+        <div class="back-section" (click)="goBack()">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+            <span>Back to Home</span>
+        </div>
+    </div>
+
     <h1>Admin Center</h1>
     <div class="navigation-buttons">
       <app-icon-button
@@ -8,9 +15,9 @@
       ></app-icon-button>
       
       <app-icon-button
-          [icon]="faBook"
-          title="Manage Rules"
-          route="/admin/rules"
+          [icon]="faDeals"
+          title="Manage Deals"
+          route="/admin/deals"
       ></app-icon-button>
   </div>
 </div>

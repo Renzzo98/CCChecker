@@ -1,0 +1,21 @@
+<div class="deals-center-container">
+    <div class="header">
+        <div class="back-section" (click)="goBack()">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+            <span>Back</span>
+        </div>
+        <button class="toggle-btn" (click)="toggleActiveDeals()">
+            {{ showActiveOnly ? 'Show All Deals' : 'Show Active Deals' }}
+        </button>
+    </div>
+
+    <h1>Deals</h1>
+    <app-deal-list [deals]="deals"></app-deal-list>
+
+    <div class="action-bar">
+        <button class="new-deal-btn" (click)="createNewDeal()">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            New Deal
+        </button>
+    </div>
+</div>
