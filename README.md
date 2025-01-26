@@ -1,59 +1,62 @@
-# CreditCardDealsChecker
+# CCChecker (Credit Card Checker)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
+A modern web application for finding and comparing credit card deals and rewards. Built with Angular 19 and Firebase.
 
-## Development server
+![CCChecker Screenshot](src/assets/screenshot.png)
 
-To start a local development server, run:
+## Features
 
+- 🔍 Smart Search: Find credit card deals based on your shopping needs
+- 💳 Card Comparison: Compare different credit cards and their benefits
+- 🏦 Bank Directory: Browse cards by bank
+- 📱 Responsive Design: Works seamlessly on desktop and mobile
+- 🔐 Secure Admin Portal: Manage cards and deals with authentication
+
+## Tech Stack
+
+- **Frontend**: Angular 19
+- **Authentication**: Firebase Auth
+- **Hosting**: Firebase Hosting
+- **UI Components**: Font Awesome Icons
+- **Language**: TypeScript
+
+## Quick Start
+
+1. Clone the repository:
 ```bash
-ng serve
+git clone https://github.com/yourusername/ccchecker.git
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+2. Install dependencies:
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+3. Run locally:
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
-
-To build the project run:
-
+4. Deploy to Firebase:
 ```bash
-ng build
+npm run deploy
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Development
 
-## Running unit tests
+- `npm start` - Start development server
+- `npm run build` - Build for production
+- `npm run deploy` - Build and deploy to Firebase
+- `npm test` - Run unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Live Demo
 
-```bash
-ng test
-```
+Visit [CCChecker](https://creditcardchecker-50479.web.app)
 
-## Running end-to-end tests
+## Contributing
 
-For end-to-end (e2e) testing, run:
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-```bash
-ng e2e
-```
+## License
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+[MIT](LICENSE)
