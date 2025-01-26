@@ -1,5 +1,6 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Meta } from '@angular/platform-browser';
 
 type ThemeType = 'light' | 'dark';
 
@@ -64,7 +65,10 @@ export class ThemeService {
     }
   };
 
-  constructor(rendererFactory: RendererFactory2) {
+  constructor(
+    rendererFactory: RendererFactory2,
+    private meta: Meta
+  ) {
     this.renderer = rendererFactory.createRenderer(null, null);
     this.init();
   }
@@ -82,6 +86,13 @@ export class ThemeService {
         theme[key as keyof ThemeColors]
       );
     });
+    
+    // Update theme-color meta tag
+    this.meta.updateTag({
+      name: 'theme-color',
+      content: theme['--background']
+    });
+    
     this.isDarkTheme.next(scheme === 'dark');
   }
 
