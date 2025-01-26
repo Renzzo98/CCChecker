@@ -195,7 +195,28 @@
 
   &:hover {
     color: var(--primary);
+    
+    fa-icon {
+      animation: wiggle 1s ease-in-out infinite;
+    }
   }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-20deg);
+  }
+  75% {
+    transform: rotate(20deg);
+  }
+}
+
+// Add this to make the icon container inline-block to prevent layout shifts
+fa-icon {
+  display: inline-block;
 }
 
 .error-banner {
