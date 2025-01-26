@@ -15,8 +15,14 @@
       <p class="bank-name">{{ creditCard.bank }}</p>
       <p class="card-description">{{ creditCard.description }}</p>
     </div>
-    <div class="action-buttons">
-      <button class="edit-btn" (click)="handleEdit()">Edit</button>
-      <button class="delete-btn" (click)="handleDelete()">Delete</button>
+    <div class="action-bar" *ngIf="isAdmin">
+      <button class="edit-btn" (click)="editCard()">
+        <fa-icon [icon]="faEdit"></fa-icon>
+        Edit Card
+      </button>
+      <button class="delete-btn" (click)="confirmDelete()">
+        <fa-icon [icon]="faTrash"></fa-icon>
+        Delete Card
+      </button>
     </div>
 </div>

@@ -89,9 +89,15 @@
         <textarea id="description" [(ngModel)]="card.description" name="description" rows="4"></textarea>
       </div>
 
-      <div class="action-buttons">
-        <button type="button" class="cancel-btn" (click)="goBack()">Cancel</button>
-        <button type="submit" class="save-btn" >Save</button>
+      <div class="action-bar">
+        <button class="save-btn" (click)="onSubmit()">
+          <fa-icon [icon]="faSave"></fa-icon>
+          Save Card
+        </button>
+        <button class="cancel-btn" (click)="goBack()">
+          <fa-icon [icon]="faTimes"></fa-icon>
+          Cancel
+        </button>
       </div>
     </form>
   </div>

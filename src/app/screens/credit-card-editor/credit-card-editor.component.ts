@@ -6,11 +6,12 @@ import { CreditCard } from '../../models/credit-card.model';
 import { CreditCardService } from '../../services/credit-card.service';
 import { BANKS } from '../../constants/banks';
 import { CARD_TYPES } from '../../constants/card-types';
-
+import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @Component({
   selector: 'app-credit-card-editor',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, FontAwesomeModule],
   templateUrl: './credit-card-editor.component.html',
   styleUrls: ['./credit-card-editor.component.scss']
 })
@@ -22,6 +23,8 @@ export class CreditCardEditorComponent implements OnInit {
   showCustomBank = false;
   cardTypes = CARD_TYPES;
   showCustomType = false;
+  faSave = faSave;
+  faTimes = faTimes;
 
   constructor(
     private router: Router,
